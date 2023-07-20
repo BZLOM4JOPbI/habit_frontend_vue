@@ -37,6 +37,7 @@
         display: flex
         align-items: center
         justify-content: center
+        -webkit-backface-visibility: hidden
     .welcome-title
         padding: 20px 30px
         position: relative
