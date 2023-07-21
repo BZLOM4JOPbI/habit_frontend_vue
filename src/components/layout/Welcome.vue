@@ -3,24 +3,25 @@
 
     
     const isBanner = ref<Boolean>(true);
-    setInterval(() => {
+    const banner = ref();
+    const bannerWatcher = setInterval(() => {
+        if (window.getComputedStyle(banner.value).visibility === 'visible') return
         isBanner.value = false;
-    }, 1800)
+        clearInterval(bannerWatcher);
+    }, 1000);
 </script>
 
 <template>
-    <Transition>
-        <div 
-            class="welcome" 
-            @wheel.prevent
-            @touchmove.prevent
-            @scroll.prevent
-            v-if="isBanner"
-        >
-
-            <div class="welcome-title" v-if="isBanner">Welcome</div>
-        </div>
-    </Transition>
+    <div 
+        class="welcome" 
+        @wheel.prevent
+        @touchmove.prevent
+        @scroll.prevent
+        ref="banner"
+        v-if="isBanner"
+    >
+        <div class="welcome-title">Welcome</div>
+    </div>
 </template>
 
 <style scoped lang="sass">
@@ -37,6 +38,7 @@
         align-items: center
         justify-content: center
         -webkit-backface-visibility: hidden
+        animation: banner-out .3s ease-out 1.5s forwards
     .welcome-title
         padding: 20px 30px
         position: relative
@@ -52,23 +54,22 @@
             right: 0
             background-color: #fff
             height: 100%
-            animation: title-fill .3s ease-in 1s forwards
+            animation: title-fill .3s ease-in 0.9s forwards
             
-    .v-enter-active, .v-leave-active 
-        opacity: 1
-        transition: opacity .5s ease-out
-    .v-enter-from, .v-leave-to 
-        opacity: 0
-
     @keyframes title-in 
-        0% 
+        from
             transform: scale(0.5)
-        100% 
+        to
             transform: scale(1)
     @keyframes title-fill 
         from
             height: 100%
         to
             height: 0
-    
+    @keyframes banner-out
+        from
+            opacity: 1
+        to
+            opacity: 0
+            visibility: hidden
 </style>
