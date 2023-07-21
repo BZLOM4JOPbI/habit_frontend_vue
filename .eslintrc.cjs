@@ -12,7 +12,7 @@ module.exports = {
         ecmaVersion: 'latest',
     },
     rules: {
-        "indent": ["error", 4,],
+        "indent": [ "error", 4, ],
         "comma-dangle": [
             "error", 
             {
@@ -25,25 +25,27 @@ module.exports = {
         ],
         "object-curly-spacing" : [
             "error",
+            "always",
             {
-                "arraysInObjects" : "always",
-                "objectsInObjects" : "always",
+                "arraysInObjects" : true,
+                "objectsInObjects" : true,
             },
         ],
         "array-bracket-spacing" : [
             "error",
+            "always",
             {
-                "singleValue": "always",
-                "objectsInArrays" : "always",
-                "arraysInArrays" : "always",
+                "singleValue": true,
+                "objectsInArrays" : true,
+                "arraysInArrays" : true,
             },
         ],
         "comma-spacing" : [
             "error",
             {
-                "before": "never",
-                "after": "always",
-            }
+                "before": false,
+                "after": true,
+            },
         ],
     },
 }
