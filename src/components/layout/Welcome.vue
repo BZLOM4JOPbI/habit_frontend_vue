@@ -53,11 +53,10 @@
             background-color: #fff
             height: 100%
             animation: title-fill .3s ease-in 1s forwards
-
+            
     .v-enter-active, .v-leave-active 
         opacity: 1
         transition: opacity .5s ease-out
-
     .v-enter-from, .v-leave-to 
         opacity: 0
 
@@ -66,7 +65,6 @@
             transform: scale(0.5)
         100% 
             transform: scale(1)
-
     @keyframes title-fill 
         from
             height: 100%
