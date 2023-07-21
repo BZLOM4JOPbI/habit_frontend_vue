@@ -1,14 +1,15 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+import { ref, } from 'vue'
 
-    
-    const isBanner = ref<Boolean>(true);
-    const banner = ref();
-    const bannerWatcher = setInterval(() => {
+const isBanner = ref<Boolean>(true);
+const banner = ref<HTMLElement>();
+const bannerWatcher = setInterval(() => {
+    if (banner.value) {
         if (window.getComputedStyle(banner.value).visibility === 'visible') return
         isBanner.value = false;
         clearInterval(bannerWatcher);
-    }, 1000);
+    }
+}, 1000);
 </script>
 
 <template>

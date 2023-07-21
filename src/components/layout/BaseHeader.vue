@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { RouterLink, } from 'vue-router'
+</script>
+
 <template>
     <header class="header">
         <div class="container">
