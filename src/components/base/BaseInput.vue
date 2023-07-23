@@ -10,7 +10,7 @@ defineEmits([ 'update:modelValue', ]);
             type="text" 
             class="input"
             :value="modelValue"
-            @input.prevent="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+            @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         >
         <div 
             class="input-placeholder"
