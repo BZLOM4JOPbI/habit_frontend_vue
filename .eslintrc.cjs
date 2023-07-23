@@ -47,5 +47,6 @@ module.exports = {
                 "after": true,
             },
         ],
+        "space-in-parens": [ "error", "never", ],
     },
 }

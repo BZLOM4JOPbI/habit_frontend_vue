@@ -12,7 +12,7 @@ import { RouterLink, } from 'vue-router'
                 <div class="header-links">
                     <RouterLink to="/" class="header-link underline-decrease">Nav Link</RouterLink>
                     <RouterLink to="/" class="header-link underline-decrease">Nav Link</RouterLink>
-                    <RouterLink to="/" class="header-link underline-decrease">Nav Link</RouterLink>
+                    <RouterLink to="/signup" class="header-link underline-decrease">Sign Up</RouterLink>
                 </div>
             </nav>
         </div>

@@ -17,6 +17,7 @@ import Welcome from './components/layout/BannerWelcome.vue'
 <style scoped lang="sass">
     @import "@/assets/styles/main"
     .main 
+        margin: 80px 0 100px
         flex: 1 1 auto
 
 </style>
