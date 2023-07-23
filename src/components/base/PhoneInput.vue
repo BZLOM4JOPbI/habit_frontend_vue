@@ -10,7 +10,7 @@ defineEmits([ 'update:modelValue', ]);
             type="text" 
             class="input"
             :value="modelValue"
-            @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+            @input.prevent="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
             v-maska="'+7 (###) ### ##-##'"
         >
         <div 
