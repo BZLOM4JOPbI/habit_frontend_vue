@@ -32,6 +32,7 @@ defineEmits([ 'update:modelValue', ]);
         position: relative
         background-color: transparent
         z-index: 1
+        font-size: $font-size-s
     .input-wrap
         width: 100%
         position: relative
