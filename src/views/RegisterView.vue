@@ -1,41 +1,36 @@
 <script setup lang="ts">
-import { ref, } from 'vue';
+import { reactive, ref, } from 'vue';
 import BaseInput from '../components/base/BaseInput.vue'
 import PhoneInput from '../components/base/PhoneInput.vue'
+import BaseTitle from '../components/base/BaseTitle.vue'
+import BaseButton from '../components/base/BaseButton.vue'
+import FormRegister from '../components/form/FormRegister.vue'
 
-const input = ref();
-const phoneNumber = ref()
+
+const userModel = reactive({
+    phoneNumber: '',
+    userName: '',
+    password: '',
+    passwordRepeat: '',
+}); 
 
 </script>
 
 <template>
     <div class="container">
         <div class="main-inner">
-            <div class="register-wrap">
-                <form class="register">
-                    <BaseInput v-model="input" :label="'placeholder'"/>
-                    <PhoneInput v-model="phoneNumber"/>
-                </form>
-            </div>
+            <BaseTitle :title="'Sign Up'" />
+            <FormRegister>
+                <PhoneInput v-model="userModel.phoneNumber" :type="'tel'" />
+                <BaseInput v-model="userModel.userName" :label="'Name'" :type="'text'" />
+                <BaseInput v-model="userModel.password" :label="'Password'" :type="'password'" />
+                <BaseInput v-model="userModel.passwordRepeat" :label="'Password Repeat'" :type="'password'"/>
+                <BaseButton :label="'Submit'" />
+            </FormRegister>
         </div>
     </div>
 </template>
 
 <style scoped lang="sass">
     @import "@/assets/styles/main"
-
-    
-    .register-wrap
-        padding: 3% 8%
-        max-width: 600px
-        margin: 0 auto
-        border: 3px solid #111
-        border-radius: 3px
-        display: flex
-        flex-direction: column
-        align-items: stretch
-    .register
-        display: flex
-        gap: 20px
-        flex-direction: column
 </style>

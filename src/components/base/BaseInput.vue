@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps([ 'modelValue', 'label', ]);
+defineProps([ 'modelValue', 'label', 'type', ]);
 defineEmits([ 'update:modelValue', ]);
 
 </script>
@@ -7,7 +7,7 @@ defineEmits([ 'update:modelValue', ]);
 <template>
     <div class="input-wrap">
         <input 
-            type="text" 
+            :type="type" 
             class="input"
             :value="modelValue"
             @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
@@ -35,26 +35,22 @@ defineEmits([ 'update:modelValue', ]);
     .input-wrap
         width: 100%
         position: relative
-        border: 2px solid #111
-        border-radius: 3px
+        border: 2px solid 
+        border-radius: 3px solid $font-color-base
     .input-placeholder
         position: absolute
         left: 20px
         top: 50%
         transform: translateY(-50%)
         z-index: 0
-        color: grey
+        color: $font-color-opacity
         padding: 3px 5px
-        background-color: #fff
+        background-color: $bg-color
         font-size: $font-size-ss
         user-select: none
         transition: all .3s ease
-    .input:focus + .input-placeholder
+    .input:focus + .input-placeholder, .input-placeholder-active
         font-size: 16px
-        color: #111
-        top: 0
-    .input-placeholder-active
-        font-size: 16px 
-        color: #111 
+        color: $font-color-base
         top: 0
 </style>
