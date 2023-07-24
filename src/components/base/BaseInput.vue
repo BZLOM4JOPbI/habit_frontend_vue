@@ -1,22 +1,38 @@
 <script setup lang="ts">
-defineProps([ 'modelValue', 'label', 'type', ]);
+import { computed, } from 'vue';
+
+const props = defineProps([ 'modelValue', 'label', 'type', 'errorMessage', ]);
 defineEmits([ 'update:modelValue', ]);
 
+const inputMask = computed(() => {
+    return props.type === 'tel' ? '+7 (###) ### ##-##' : ''
+})
 </script>
 
 <template>
     <div class="input-wrap">
-        <input 
-            :type="type" 
-            class="input"
-            :value="modelValue"
-            @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-        >
+        <div class="input-inner">
+            <input 
+                :type="props.type" 
+                class="input"
+                :value="props.modelValue"
+                @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+                v-maska="inputMask"
+            >
+            <div 
+                class="input-placeholder"
+                :class="{ 'input-placeholder-active': props.modelValue }"
+            >
+                {{ props.label }}
+            </div>
+        </div>
         <div 
-            class="input-placeholder"
-            :class="{ 'input-placeholder-active': modelValue }"
+            class="input-error_wrap"
+            :class="{ 'input-error_wrap-active': props.errorMessage }"
         >
-            {{ label }}
+            <div class="input-error" >
+                {{ props.errorMessage }}
+            </div>
         </div>
     </div>
 </template>
@@ -32,7 +48,7 @@ defineEmits([ 'update:modelValue', ]);
         background-color: transparent
         z-index: 1
         font-size: $font-size-s
-    .input-wrap
+    .input-inner
         width: 100%
         position: relative
         border: 2px solid 
@@ -53,4 +69,12 @@ defineEmits([ 'update:modelValue', ]);
         font-size: 16px
         color: $font-color-base
         top: 0
+    .input-error_wrap
+        display: grid
+        grid-template-rows: 0fr
+        transition: grid-template-rows .2s ease
+    .input-error_wrap-active
+        grid-template-rows: 1fr
+    .input-error
+        min-height: 0
 </style>

@@ -17,7 +17,7 @@ defineProps([ 'title', ])
         padding: 12px 0
         display: block
         text-align: center
-        font-size: $font-size-l
+        font-size: $font-size-xl
         color: $font-color-base
         font-weight: 500
 </style>
