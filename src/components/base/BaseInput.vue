@@ -77,4 +77,9 @@ const inputMask = computed(() => {
         grid-template-rows: 1fr
     .input-error
         min-height: 0
+    input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active
+        -webkit-background-clip: text
+        -webkit-text-fill-color: $font-color-base
+        transition: background-color 5000s ease-in-out 0s
+
 </style>

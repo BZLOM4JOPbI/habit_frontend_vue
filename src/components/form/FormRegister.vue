@@ -3,21 +3,26 @@ import { reactive, } from 'vue';
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import { usernameValidate, passwordValidate, passwordsEquality, phoneValidate, } from '@/utils/validation'
+import { useUserStore, } from '@/stores/user'
 
+
+const store = useUserStore();
 
 const userModel = reactive({
     phoneNumber: '',
     userName: '',
+    email: '',
     password: '',
     passwordRepeat: '',
 }); 
 const userModelErrors = reactive({
     phoneNumber: '',
     userName: '',
+    email: '',
     password: '',
     passwordRepeat: '',
 });
-const submitHandler = () => {
+const submitHandler = async () => {
     userModelErrors.userName = usernameValidate(userModel.userName);
     userModelErrors.password = passwordValidate(userModel.password);
     userModelErrors.phoneNumber = phoneValidate(userModel.phoneNumber);
@@ -25,6 +30,10 @@ const submitHandler = () => {
     if (!userModelErrors.password) {
         userModelErrors.passwordRepeat = passwordsEquality(userModel.password, userModel.passwordRepeat);
     }
+    for (const field in userModelErrors) {
+        if (userModelErrors[field]) return
+    }
+    await store.signUp(userModel);
 };
 </script>
 
@@ -36,6 +45,12 @@ const submitHandler = () => {
                     :label="'Phone'" 
                     :type="'tel'" 
                     :error-message="userModelErrors.phoneNumber" 
+                />
+                <BaseInput 
+                    v-model="userModel.email" 
+                    :label="'Email'" 
+                    :type="'email'" 
+                    :error-message="userModelErrors.email" 
                 />
                 <BaseInput 
                     v-model="userModel.userName" 
