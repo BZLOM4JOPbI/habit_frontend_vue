@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="main-inner">
-            Hello, VueJS
+            Hello, VueJS!
         </div>
     </div>
 </template>
