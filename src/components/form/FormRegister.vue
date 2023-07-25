@@ -30,9 +30,10 @@ const submitHandler = async () => {
     if (!userModelErrors.password) {
         userModelErrors.passwordRepeat = passwordsEquality(userModel.password, userModel.passwordRepeat);
     }
-    for (const field in userModelErrors) {
-        if (userModelErrors[field]) return
-    }
+    // for (const field in userModelErrors) {
+    //     if (userModelErrors[]) return
+    // }
+    if (userModel.email || userModel.userName || userModel.phoneNumber || userModel.password || userModel.passwordRepeat) return
     await store.signUp(userModel);
 };
 </script>
