@@ -39,7 +39,7 @@ const bannerWatcher = setInterval(() => {
         align-items: center
         justify-content: center
         -webkit-backface-visibility: hidden
-        animation: banner-out .3s ease-out 1.5s forwards
+        animation: banner-out .3s ease-out 1s forwards
     .welcome-title
         padding: 20px 30px
         position: relative
@@ -47,7 +47,7 @@ const bannerWatcher = setInterval(() => {
         background-color: transparent
         color: #fff
         font-size: 50px
-        animation: title-in 1s cubic-bezier(.23,.75,.25,1)
+        animation: title-in .8s cubic-bezier(.23,.75,.25,1)
         &::before
             content: ''
             bottom: 0
@@ -55,7 +55,7 @@ const bannerWatcher = setInterval(() => {
             right: 0
             background-color: #fff
             height: 100%
-            animation: title-fill .3s ease-in 0.9s forwards
+            animation: title-fill .2s ease-in 0.6s forwards
             
     @keyframes title-in 
         from
