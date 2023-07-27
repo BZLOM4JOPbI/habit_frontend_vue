@@ -1,34 +1,41 @@
-import { ref, } from 'vue'
+import { ref, computed, } from 'vue'
 import { defineStore, } from 'pinia'
 import axios from 'axios';
-
+import type { UserSignUp, } from '@/models/user'
 export const useUserStore = defineStore('user', () => {
-    type userSignUp = {
-        userName: string,
-        email: string,
-        phoneNumber: string,
-        password: string,
-        passwordRepeat: string,
-    }
-    const user = ref();
-    const token = ref();
+    const user = ref(null);
+    const token = ref<string | null>(JSON.parse((localStorage.getItem('token') as string)) || null);
 
-    const signUp = async (credentials: userSignUp):Promise<void> => {
+    const isAuth = computed(() => {
+        return Boolean(user.value && token.value)
+    });
 
-        const { data, } = await axios.post('http://127.0.0.1:8000/api/auth/signup', {
-            name: credentials.userName,
-            email: credentials.email,
-            phone: credentials.phoneNumber,
-            password: credentials.password,
-            password_confirmation: credentials.passwordRepeat,
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+    const signUp = async (credentials: UserSignUp):Promise<void> => {
+        const serverApi = import.meta.env.VITE_API_URL;
+        const { data, } = await axios.post(`${serverApi}/api/auth/signup`, 
+            {
+                name: credentials.userName,
+                email: credentials.email,
+                phone: credentials.phoneNumber,
+                password: credentials.password,
+                password_confirmation: credentials.passwordRepeat,
+            }, 
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
         user.value = data.user;
         token.value = data.token;
+        localStorage.setItem('token', JSON.stringify(token.value));
     };
 
-    return { signUp, }
+    const signOut = ():void => {
+        user.value = null;
+        token.value = null;
+        localStorage.removeItem('token');
+    };
+
+    return { signUp, signOut, user, token, isAuth, }
 })

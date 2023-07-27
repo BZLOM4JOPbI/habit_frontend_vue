@@ -72,9 +72,9 @@ const mouseOutHandler = () => {
     .button-active-left
         color: $font-color-light
         &::after
-            width: 150%
+            width: calc(100% + 65px)
     .button-active-right
         color: $font-color-light
         &::before
-            width: 150%
+            width: calc(100% + 65px)
 </style>

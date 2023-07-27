@@ -2,20 +2,21 @@
 import { reactive, } from 'vue';
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
-import { usernameValidate, passwordValidate, passwordsEquality, phoneValidate, } from '@/utils/validation'
+import ValidateService from '@/utils/validation'
 import { useUserStore, } from '@/stores/user'
+import type { UserSignUp, } from '@/models/user'
 
 
-const store = useUserStore();
+const user = useUserStore();
 
-const userModel = reactive({
+const userModel:UserSignUp = reactive({
     phoneNumber: '',
     userName: '',
     email: '',
     password: '',
     passwordRepeat: '',
 }); 
-const userModelErrors = reactive({
+const userModelErrors:UserSignUp = reactive({
     phoneNumber: '',
     userName: '',
     email: '',
@@ -23,19 +24,24 @@ const userModelErrors = reactive({
     passwordRepeat: '',
 });
 const submitHandler = async () => {
-    userModelErrors.userName = usernameValidate(userModel.userName);
-    userModelErrors.password = passwordValidate(userModel.password);
-    userModelErrors.phoneNumber = phoneValidate(userModel.phoneNumber);
-
+    userModelErrors.userName = ValidateService.usernameValidate(userModel.userName);
+    userModelErrors.password = ValidateService.passwordValidate(userModel.password);
+    userModelErrors.phoneNumber = ValidateService.phoneValidate(userModel.phoneNumber);
+    userModelErrors.email = ValidateService.emailValidate(userModel.email);
     if (!userModelErrors.password) {
-        userModelErrors.passwordRepeat = passwordsEquality(userModel.password, userModel.passwordRepeat);
+        userModelErrors.passwordRepeat = ValidateService.passwordsEquality(userModel.password, userModel.passwordRepeat);
     }
-    // for (const field in userModelErrors) {
-    //     if (userModelErrors[]) return
-    // }
-    if (userModel.email || userModel.userName || userModel.phoneNumber || userModel.password || userModel.passwordRepeat) return
-    await store.signUp(userModel);
+
+    let errorField: keyof UserSignUp;
+    for (errorField in userModelErrors) {
+        if (userModelErrors[errorField]) return
+    }
+
+    await user.signUp(userModel);
+    console.log(user.user);
 };
+
+
 </script>
 
 <template>
@@ -72,8 +78,11 @@ const submitHandler = async () => {
                     :error-message="userModelErrors.passwordRepeat"
                 />
                 <BaseButton :label="'Submit'" />
+                {{ user.isAuth }}
         </form>
+        {{ user.token }}
     </section>
+    <BaseButton :label="'Sign Out'" @click="user.signOut" />
 </template>
 
 <style scoped lang="sass">
