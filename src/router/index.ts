@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory, } from 'vue-router'
 import IndexView from "../views/IndexView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import LoginView from "../views/LoginView.vue";
+
+import authMiddleware from './middleware/auth'
 
 
 const router = createRouter({
@@ -10,18 +13,33 @@ const router = createRouter({
             path: '/',
             name: 'index',
             component: IndexView,
+            meta: {
+                layout: 'GuestLayout',
+                // forAuth: true,
+            },
         },
         {
             path: '/signup',
             name: 'register',
             component: RegisterView,
+            meta: {
+                layout: 'GuestLayout',
+                // forGuest: true,
+            },
+        },
+        {
+            path: '/signin',
+            name: 'login',
+            component: LoginView,
+            meta: {
+                layout: 'GuestLayout',
+                // forGuest: true,
+            },
         },
 
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
     ],
 })
+
+router.beforeEach(authMiddleware);
 
 export default router

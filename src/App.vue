@@ -1,23 +1,24 @@
 <script setup lang="ts">
+import { computed, onMounted, } from 'vue';
 import { RouterView, } from 'vue-router'
-import Header from './components/layout/BaseHeader.vue'
-import Footer from './components/layout/BaseFooter.vue'
-import Welcome from './components/layout/BannerWelcome.vue'
+import { useRouter,  } from 'vue-router'
+import { useUserStore, } from './stores/user';
+
+
+const router = useRouter()
+const layout = computed(() => {
+    return router.currentRoute.value.meta.layout
+})
+const userStore = useUserStore();
+
+onMounted(async () => {
+    await userStore.getUserInfo();
+})
 </script>
 
 <template>
-    <Header />
-    <main class="main">
+    <component :is="layout">
         <RouterView />
-    </main>
-    <Welcome />
-    <Footer />
+    </component>
 </template>
 
-<style scoped lang="sass">
-    @import "@/assets/styles/main"
-    .main 
-        margin: 80px 0 100px
-        flex: 1 1 auto
-
-</style>

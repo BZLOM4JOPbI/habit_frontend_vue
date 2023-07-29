@@ -38,6 +38,7 @@ const submitHandler = async () => {
     }
 
     await user.signUp(userModel);
+    console.log(user.user);
 };
 
 
@@ -47,34 +48,16 @@ const submitHandler = async () => {
     <section class="form-wrap">
         <form class="form" @submit.prevent="submitHandler">
                 <BaseInput 
-                    v-model="userModel.phoneNumber" 
-                    :label="'Phone'" 
-                    :type="'tel'" 
-                    :error-message="userModelErrors.phoneNumber" 
-                />
-                <BaseInput 
                     v-model="userModel.email" 
                     :label="'Email'" 
                     :type="'email'" 
                     :error-message="userModelErrors.email" 
                 />
                 <BaseInput 
-                    v-model="userModel.userName" 
-                    :label="'Name'" 
-                    :type="'text'" 
-                    :error-message="userModelErrors.userName" 
-                />
-                <BaseInput 
                     v-model="userModel.password" 
                     :label="'Password'" 
                     :type="'password'" 
                     :error-message="userModelErrors.password" 
-                />
-                <BaseInput 
-                    v-model="userModel.passwordRepeat" 
-                    :label="'Password Repeat'" 
-                    :type="'password'" 
-                    :error-message="userModelErrors.passwordRepeat"
                 />
                 <BaseButton :label="'Submit'" />
                 {{ user.isAuth }}
