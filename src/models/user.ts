@@ -15,3 +15,10 @@ export interface UserResponse {
     isSuccesful: boolean | null,
     errors: object | null
 }
+
+export interface User {
+    name: string,
+    email: string,
+    created_at: string,
+    updated_at: string,
+}

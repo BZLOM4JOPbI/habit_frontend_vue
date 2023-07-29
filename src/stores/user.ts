@@ -1,9 +1,9 @@
 import { ref, computed, } from 'vue'
 import { defineStore, } from 'pinia'
 import axios from 'axios';
-import type { UserSignUp, UserSignIn, UserResponse, } from '@/models/user'
+import type { UserSignUp, UserSignIn, UserResponse, User, } from '@/models/user'
 export const useUserStore = defineStore('user', () => {
-    const user = ref<null | object>(null);
+    const user = ref<null | User>(null);
     const token = ref<string | null>(JSON.parse((localStorage.getItem('token') as string)) || null);
 
     const isAuth = computed(() => {
