@@ -1,44 +1,48 @@
 <script setup lang="ts">
-import { reactive, } from 'vue';
+import { reactive, ref, } from 'vue';
 import BaseInput from '@/components/base/BaseInput.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ValidateService from '@/utils/validation'
 import { useUserStore, } from '@/stores/user'
-import type { UserSignUp, } from '@/models/user'
+import type { UserSignIn, } from '@/models/user'
+import { useRouter,  } from 'vue-router'
 
 
-const user = useUserStore();
+const userStore = useUserStore();
+const router = useRouter();
+const btnDisabled = ref<Boolean>(false);
 
-const userModel:UserSignUp = reactive({
-    phoneNumber: '',
-    userName: '',
+const userModel:UserSignIn = reactive({
     email: '',
     password: '',
-    passwordRepeat: '',
 }); 
-const userModelErrors:UserSignUp = reactive({
-    phoneNumber: '',
-    userName: '',
+const userModelErrors:UserSignIn = reactive({
     email: '',
     password: '',
-    passwordRepeat: '',
 });
 const submitHandler = async () => {
-    userModelErrors.userName = ValidateService.usernameValidate(userModel.userName);
+    btnDisabled.value = true;
     userModelErrors.password = ValidateService.passwordValidate(userModel.password);
-    userModelErrors.phoneNumber = ValidateService.phoneValidate(userModel.phoneNumber);
     userModelErrors.email = ValidateService.emailValidate(userModel.email);
-    if (!userModelErrors.password) {
-        userModelErrors.passwordRepeat = ValidateService.passwordsEquality(userModel.password, userModel.passwordRepeat);
-    }
 
-    let errorField: keyof UserSignUp;
+    let errorField: keyof UserSignIn;
     for (errorField in userModelErrors) {
         if (userModelErrors[errorField]) return
     }
 
-    await user.signUp(userModel);
-    console.log(user.user);
+    const result = await userStore.signIn(userModel);
+    if (result.isSuccesful) {
+        router.push('/');
+    } else {
+        if (result.errors) {
+            const responseErrors: UserSignIn = (result.errors as UserSignIn)
+            let errorField: keyof UserSignIn;
+            for (errorField in responseErrors) {
+                userModelErrors[errorField] = responseErrors[errorField][0]
+            }
+        }
+    }
+    btnDisabled.value = false;
 };
 
 
@@ -59,13 +63,9 @@ const submitHandler = async () => {
                     :type="'password'" 
                     :error-message="userModelErrors.password" 
                 />
-                <BaseButton :label="'Submit'" />
-                {{ user.isAuth }}
+                <BaseButton :label="'Submit'" :is-disable="btnDisabled"/>
         </form>
-        {{ user.token }}
     </section>
-    {{ user.user }}
-    <BaseButton :label="'Sign Out'" @click="user.signOut" />
 </template>
 
 <style scoped lang="sass">

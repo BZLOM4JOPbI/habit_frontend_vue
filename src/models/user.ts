@@ -1,13 +1,17 @@
 export interface UserSignUp {
-    userName: string,
+    name: string,
     email: string,
-    phoneNumber: string,
+    phone: string,
     password: string,
-    passwordRepeat: string,
+    password_confirmation: string,
 }
 
 export interface UserSignIn {
     email: string,
-    phoneNumber: string,
     password: string,
+}
+
+export interface UserResponse {
+    isSuccesful: boolean | null,
+    errors: object | null
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, } from 'vue';
 
-defineProps([ 'label', ]);
+defineProps([ 'label', 'isDisable']);
 
 const backgroundArray = reactive({
     'button-active-left': false,
@@ -37,6 +37,7 @@ const mouseOutHandler = () => {
         @mouseover="mouseInHandler"
         @mouseleave="mouseOutHandler"
         :class="backgroundArray"
+        :disabled="isDisable"
     >
         {{ label }}
     </button>

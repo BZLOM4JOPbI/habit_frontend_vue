@@ -1,7 +1,7 @@
 import { ref, computed, } from 'vue'
 import { defineStore, } from 'pinia'
 import axios from 'axios';
-import type { UserSignUp, } from '@/models/user'
+import type { UserSignUp, UserSignIn, UserResponse, } from '@/models/user'
 export const useUserStore = defineStore('user', () => {
     const user = ref<null | object>(null);
     const token = ref<string | null>(JSON.parse((localStorage.getItem('token') as string)) || null);
@@ -19,45 +19,74 @@ export const useUserStore = defineStore('user', () => {
         },
     });
 
-    const signUp = async (credentials: UserSignUp):Promise<void> => {
-        await userRequest({
+    const signUp = async (credentials: UserSignUp):Promise<UserResponse> => {
+        const result:UserResponse = await userRequest({
             method: 'POST',
             url: '/api/auth/signup', 
-            data: {
-                name: credentials.userName,
-                email: credentials.email,
-                phone: credentials.phoneNumber,
-                password: credentials.password,
-                password_confirmation: credentials.passwordRepeat,
-            },
+            data: credentials,
         })
             .then(Response => {
-                if (Response.status !== 201) return
+                if (Response.status !== 201) {
+                    return {
+                        isSuccesful: false,
+                        errors: null,
+                    }
+                }
 
                 const data = Response.data;
                 user.value = data.user;
                 token.value = data.token
                 localStorage.setItem('token', JSON.stringify(token.value));
+
+                return {
+                    isSuccesful: true,
+                    errors: null,
+                }
             })
-            .catch(Error => console.error(Error))
+            .catch(Error => {
+                const reponseErrors: object = Error.response.data.errors;
+                console.error(Error)
+                return {
+                    isSuccesful: false,
+                    errors: reponseErrors,
+                }
+            });
+        return result
     };
 
-    const signIn = async (credential: object):Promise<void> => {
-        await userRequest({
+    const signIn = async (credential: UserSignIn):Promise<UserResponse> => {
+        const result: UserResponse = await userRequest({
             method: 'POST',
             url: '/api/auth/signin',
             data: credential,
         })
             .then(Response => {
-                console.log(Response);
-                // if (Response.status !== 201) return
+                if (Response.status !== 201) {
+                    return {
+                        isSuccesful: false,
+                        errors: null,
+                    }
+                }
 
-                // const data = Response.data;
-                // user.value = data.user;
-                // token.value = data.token
-                // localStorage.setItem('token', JSON.stringify(token.value));
+                const data = Response.data;
+                user.value = data.user;
+                token.value = data.token
+                localStorage.setItem('token', JSON.stringify(token.value));
+
+                return {
+                    isSuccesful: true,
+                    errors: null,
+                }
             })
-            .catch(Error => console.error(Error)) 
+            .catch(Error => {
+                const reponseErrors: object = Error.response.data.errors;
+                console.error(Error)
+                return {
+                    isSuccesful: false,
+                    errors: reponseErrors,
+                }
+            });
+        return result
     };
 
     const signOut = ():void => {
@@ -68,6 +97,7 @@ export const useUserStore = defineStore('user', () => {
 
 
     const getUserInfo = async ():Promise<void> => {
+        if (!token.value) return
         await userRequest({
             method: 'GET',
             url: '/api/auth/info',
@@ -79,7 +109,7 @@ export const useUserStore = defineStore('user', () => {
             })
     };
 
-    return { signUp, signOut, getUserInfo, user, token, isAuth, }
+    return { signUp, signIn, signOut, getUserInfo, user, token, isAuth, }
 });
 
 

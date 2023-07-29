@@ -15,7 +15,7 @@ const router = createRouter({
             component: IndexView,
             meta: {
                 layout: 'GuestLayout',
-                // forAuth: true,
+                forAuth: true,
             },
         },
         {
@@ -24,7 +24,7 @@ const router = createRouter({
             component: RegisterView,
             meta: {
                 layout: 'GuestLayout',
-                // forGuest: true,
+                forGuest: true,
             },
         },
         {
@@ -33,7 +33,7 @@ const router = createRouter({
             component: LoginView,
             meta: {
                 layout: 'GuestLayout',
-                // forGuest: true,
+                forGuest: true,
             },
         },
 
