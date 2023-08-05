@@ -27,6 +27,7 @@ const submitHandler = async () => {
 
     let errorField: keyof UserSignIn;
     for (errorField in userModelErrors) {
+        btnDisabled.value = false;
         if (userModelErrors[errorField]) return
     }
 

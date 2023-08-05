@@ -20,7 +20,7 @@ const switcherPositionClasses = ref({
         <div class="container">
             <nav class="header-inner">
                 <div class="header-logo_wrap underline-increase">
-                    <RouterLink to="/" class="header-logo logo">habit</RouterLink>
+                    <div class="header-logo logo">habit</div>
                 </div>
                 <!-- <div class="header-links">
                     <RouterLink to="/signin" class="header-link underline-decrease">Sign In</RouterLink>
@@ -67,9 +67,11 @@ const switcherPositionClasses = ref({
         align-items: center
         justify-content: space-between
         flex-wrap: wrap
-        row-gap: 20px
+        gap: 20px
     .header-logo 
-        font-size: 36px
+        font-size: $font-size-xl
+        @media screen and (max-width: 500px) 
+            font-size: $font-size-l
     .header-link
         margin-right: 20px
         &:last-of-type
@@ -123,6 +125,7 @@ const switcherPositionClasses = ref({
         font-size: 24px
     .footer-copy
         font-weight: 700
+        user-select: none
         
 
     .main 
