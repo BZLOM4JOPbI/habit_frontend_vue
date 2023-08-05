@@ -107,13 +107,13 @@ const switcherPositionClasses = ref({
             color: $font-color-light
         .header-switch_bg
             right: 50%
-            left: 1px
+            left: -3px
     .header-switch-right
         .header-switch_el:last-child
             color: $font-color-light
         .header-switch_bg
             left: 50%
-            right: -1px
+            right: -3px
     .footer-inner 
         padding: 20px 0
         display: flex
