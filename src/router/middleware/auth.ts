@@ -10,7 +10,7 @@ const authMiddleware = (to: any, from: any, next: any) => {
         if (isAuth) {
             next();
         } else {
-            next({ name: 'login', });
+            next({ name: 'SignIn', });
         }
     } else if (to.meta.forGuest) {
         if (isAuth) {

@@ -50,7 +50,7 @@ const mouseOutHandler = () => {
 
     .button
         padding: 12px 20px
-        border: 2px solid $font-color-base
+        border: $b-width solid $font-color-base
         background-color: transparent
         cursor: pointer
         position: relative

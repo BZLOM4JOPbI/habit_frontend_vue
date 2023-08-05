@@ -51,8 +51,7 @@ const inputMask = computed(() => {
     .input-inner
         width: 100%
         position: relative
-        border: 2px solid 
-        border-radius: 3px solid $font-color-base
+        border: $b-width solid $bg-dark
     .input-placeholder
         position: absolute
         left: 20px

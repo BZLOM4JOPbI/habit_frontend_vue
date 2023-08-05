@@ -20,7 +20,7 @@ const router = createRouter({
         },
         {
             path: '/signup',
-            name: 'register',
+            name: 'SignUp',
             component: RegisterView,
             meta: {
                 layout: 'GuestLayout',
@@ -29,7 +29,7 @@ const router = createRouter({
         },
         {
             path: '/signin',
-            name: 'login',
+            name: 'SignIn',
             component: LoginView,
             meta: {
                 layout: 'GuestLayout',
