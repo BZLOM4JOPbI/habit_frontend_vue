@@ -14,8 +14,11 @@ const userName = computed(() => {
 const btnDisabled = ref<Boolean>(false);
 const handeLogout = async () => {
     btnDisabled.value = true; 
-    userStore.signOut();
-    router.push('/signin');
+    const result = await userStore.signOut();
+    if (result) {
+        btnDisabled.value = false;
+        router.push('/signin');
+    }
     btnDisabled.value = false;
 };
 </script>

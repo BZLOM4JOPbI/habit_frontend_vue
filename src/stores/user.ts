@@ -37,6 +37,7 @@ export const useUserStore = defineStore('user', () => {
                 user.value = data.user;
                 token.value = data.token
                 localStorage.setItem('token', JSON.stringify(token.value));
+                Object.assign(userRequest.defaults.headers, { 'Authorization' : `Bearer ${token.value}`, });
 
                 return {
                     isSuccesful: true,
@@ -72,7 +73,8 @@ export const useUserStore = defineStore('user', () => {
                 user.value = data.user;
                 token.value = data.token
                 localStorage.setItem('token', JSON.stringify(token.value));
-
+                Object.assign(userRequest.defaults.headers, { 'Authorization' : `Bearer ${token.value}`, });
+                
                 return {
                     isSuccesful: true,
                     errors: null,
@@ -89,10 +91,25 @@ export const useUserStore = defineStore('user', () => {
         return result
     };
 
-    const signOut = ():void => {
-        user.value = null;
-        token.value = null;
-        localStorage.removeItem('token');
+    const signOut = async ():Promise<Boolean> => {
+        const result = await userRequest({
+            method: 'DELETE',
+            url: '/api/auth/signout',
+        })
+            .then((Response) => {
+                if (Response.status === 204) {
+                    user.value = null;
+                    token.value = null;
+                    localStorage.removeItem('token');
+                    return true
+                }
+                return false
+            })
+            .catch((Error) => {
+                console.error(Error);
+                return false
+            });
+        return result
     };
 
 
