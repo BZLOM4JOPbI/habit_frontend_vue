@@ -60,11 +60,14 @@ const switcherPositionClasses = ref({
         left: 0
         right: 0
         background-color: $bg-color
+        z-index: 1
     .header-inner 
         padding: 20px 0
         display: flex
         align-items: center
         justify-content: space-between
+        flex-wrap: wrap
+        row-gap: 20px
     .header-logo 
         font-size: 36px
     .header-link
@@ -72,6 +75,7 @@ const switcherPositionClasses = ref({
         &:last-of-type
             margin-right: 0
     .header-switch 
+        flex-shrink: 0
         position: relative
         display: grid
         grid-template-columns: 1fr 1fr
@@ -97,22 +101,19 @@ const switcherPositionClasses = ref({
         bottom: 0
         background-color: $bg-dark
         z-index: -1
-        // transition: transform .2s
         transition: left .2s, right .2s
     .header-switch-left
         .header-switch_el:first-child
             color: $font-color-light
         .header-switch_bg
-            // transform: translateX(0)
             right: 50%
-            left: 0
+            left: 1px
     .header-switch-right
         .header-switch_el:last-child
             color: $font-color-light
         .header-switch_bg
-            // transform: translateX(100%)
             left: 50%
-            right: 0
+            right: -1px
     .footer-inner 
         padding: 20px 0
         display: flex
