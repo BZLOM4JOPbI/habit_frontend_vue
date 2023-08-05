@@ -81,7 +81,7 @@ const switcherPositionClasses = ref({
         grid-template-columns: 1fr 1fr
         font-size: $font-size-s
         border: $b-width solid $bg-dark
-        border-radius: $b-radius-s
+        // border-radius: $b-radius-s
         overflow: hidden
         @media screen and (max-width: 700px) 
             font-size: $font-size-ss
