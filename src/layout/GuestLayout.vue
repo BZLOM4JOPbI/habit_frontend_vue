@@ -97,18 +97,22 @@ const switcherPositionClasses = ref({
         bottom: 0
         background-color: $bg-dark
         z-index: -1
-        transition: transform .2s
+        // transition: transform .2s
+        transition: left .2s, right .2s
     .header-switch-left
         .header-switch_el:first-child
             color: $font-color-light
         .header-switch_bg
-            transform: translateX(0)
+            // transform: translateX(0)
+            right: 50%
+            left: 0
     .header-switch-right
         .header-switch_el:last-child
             color: $font-color-light
         .header-switch_bg
-            width: 51%
-            transform: translateX(100%)
+            // transform: translateX(100%)
+            left: 50%
+            right: 0
     .footer-inner 
         padding: 20px 0
         display: flex
