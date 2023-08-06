@@ -2,7 +2,7 @@
 import { useUserStore, } from "@/stores/user"
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseTitle from '../components/base/BaseTitle.vue'
-import { ref, } from "vue";
+import { computed, ref, } from "vue";
 import { useRouter, } from 'vue-router';
 
 
@@ -19,18 +19,19 @@ const handeLogout = async () => {
     }
     btnDisabled.value = false;
 };
-const createdAt = ref(new Date((userStore.user?.created_at as string))
-    .toLocaleString(undefined, {
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit',
-        weekday:"long", 
-        hour: '2-digit', 
-        hour12: false, 
-        minute:'2-digit', 
-        second:'2-digit',
-    })
-)
+const createdAt = computed(() => {
+    return new Date((userStore.user?.created_at as string))
+        .toLocaleString(undefined, {
+            year: 'numeric', 
+            month: '2-digit', 
+            day: '2-digit',
+            weekday:"long", 
+            hour: '2-digit', 
+            hour12: false, 
+            minute:'2-digit', 
+            second:'2-digit',
+        })
+})
 </script>
 <template>
     <div class="container">
