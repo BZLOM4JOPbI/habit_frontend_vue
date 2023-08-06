@@ -14,7 +14,7 @@ const router = createRouter({
             name: 'index',
             component: IndexView,
             meta: {
-                layout: 'GuestLayout',
+                layout: 'DefaultLayout',
                 forAuth: true,
             },
         },
