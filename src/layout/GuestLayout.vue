@@ -84,7 +84,7 @@ const switcherPositionClasses = ref({
         font-size: $font-size-s
         border: $b-width solid $bg-dark
         // border-radius: $b-radius-s
-        overflow: hidden
+        // overflow: hidden
         @media screen and (max-width: 700px) 
             font-size: $font-size-ss
     .header-switch_el 
@@ -96,6 +96,7 @@ const switcherPositionClasses = ref({
             padding: 0.75em 1.125em
         @media screen and (max-width: 400px) 
             padding: 0.6em 0.9em
+
     .header-switch_bg
         position: absolute
         width: 50%
@@ -109,13 +110,13 @@ const switcherPositionClasses = ref({
             color: $font-color-light
         .header-switch_bg
             right: 50%
-            left: -3px
+            left: 0px
     .header-switch-right
         .header-switch_el:last-child
             color: $font-color-light
         .header-switch_bg
             left: 50%
-            right: -3px
+            right: 0px
     .footer-inner 
         padding: 20px 0
         display: flex
