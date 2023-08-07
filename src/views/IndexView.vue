@@ -37,8 +37,8 @@ const createdAt = computed(() => {
     <div class="container">
         <div class="main-inner">
             <BaseTitle :title="'Profile'" />
-            <div class="profile-field">UserName: <span>{{ userStore.user?.name }}</span></div>
-            <div class="profile-field">Email: <span>{{ userStore.user?.email }}</span></div>
+            <div class="profile-field">UserName: <span>{{ userStore.user?.name || 'Load' }}</span></div>
+            <div class="profile-field">Email: <span>{{ userStore.user?.email || 'Load'}}</span></div>
             <div class="profile-field">Created at: <span>{{ createdAt }}</span></div>        
             <BaseButton :label="'Sign Out'" @click="handeLogout" />
         </div>
