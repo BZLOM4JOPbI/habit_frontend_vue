@@ -1,17 +1,43 @@
 <script setup lang="ts">
-import { computed, ref, } from 'vue';
-import { RouterLink, useRouter, } from 'vue-router'
+import { onMounted, ref, } from 'vue';
+import { throttle, } from '@/utils/wrappers'
+// import { RouterLink, useRouter, } from 'vue-router'
 
 
 const currentYear = new Date().getFullYear();
 
+const isBurgerShow = ref<Boolean>(false);
+const header = ref<HTMLElement | null>(null);
+const oldPageScroll = ref(0);
+
+onMounted(() => {
+    const throttledHeaderHide:EventListener = throttle(() => {
+        const headerEl: HTMLElement | null = header.value;
+        if (!headerEl) return
+        const newPageScroll = document.documentElement.scrollTop;
+        if (newPageScroll > oldPageScroll.value) {
+            headerEl.classList.add('header-hide');
+        } else {
+            headerEl.classList.remove('header-hide')
+        }
+        console.log('yes');
+        oldPageScroll.value = newPageScroll
+    }, 75) as EventListener;
+    window.addEventListener('scroll', throttledHeaderHide, { passive: true, })
+})
 </script>
 
 <template>
-    <header class="header">
+    <header 
+        class="header"
+        ref="header"
+    >
         <div class="container">
             <nav class="header-inner">
-                <div class="header-burger_btn">
+                <div 
+                    class="header-burger_btn"
+                    @click="isBurgerShow = true"
+                >
                     <div class="header-burger_btn_inner">
                         <div class="header-burger_btn_rectangle"></div>
                         <div class="header-burger_btn_rectangle"></div>
@@ -22,14 +48,22 @@ const currentYear = new Date().getFullYear();
                     <div class="header-logo logo">h</div>
                 </div>
                 <div class="header-search"></div>
-                <div class="header-feed">
-                    <RouterLink to="/" class="header-feed_link">For You</RouterLink>
-                    <RouterLink to="/" class="header-feed_link">Your Trends</RouterLink>
+                <!-- <div class="header-feed">
+                    <RouterLink to="/feed" class="header-feed_link">For You</RouterLink>
+                    <RouterLink to="/trend" class="header-feed_link">Your Trends</RouterLink>
                     <div class="header-feed_current"></div>
-                </div>
+                </div> -->
             </nav>
         </div>
     </header>
+    <Transition name="burger">
+        <nav 
+            class="burger" 
+            v-show="isBurgerShow"
+        >
+    
+        </nav>
+    </Transition>
     <main class="main">
         <slot />
     </main>
@@ -41,6 +75,16 @@ const currentYear = new Date().getFullYear();
             </div>
         </div>
     </footer>
+    <Transition name="background">
+        <div 
+            class="burger-background"
+            v-show="isBurgerShow"
+            @wheel.prevent
+            @touchmove.prevent
+            @scroll.prevent
+            @click="isBurgerShow = false"
+        ></div>
+    </Transition>
 </template>
 
 <style scoped lang="sass">
@@ -54,7 +98,10 @@ const currentYear = new Date().getFullYear();
         right: 0
         background-color: $bg-color
         z-index: 1
+        transition: transform .2s
         // border-bottom: 1px solid black
+    .header-hide
+        transform: translateY(-100%)
     .header-inner 
         padding: 14px 0 2px
         display: grid
@@ -132,4 +179,32 @@ const currentYear = new Date().getFullYear();
             margin: 60px 0  100px
         @media screen and (max-width: 500px)
             margin: 40px 0  100px
+
+    .burger-background
+        position: fixed
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        z-index: 1
+        background-color: rgba(91, 112, 131, 0.4)
+
+    .burger
+        position: fixed
+        width: 100px
+        height: 100vh
+        background-color: black
+        top: 0
+        z-index: 2
+    .burger-enter-active, .burger-leave-active 
+        transform: translateX(0)
+        transition: transform 0.24s ease
+
+    .burger-enter-from, .burger-leave-to 
+        transform: translateX(-100%)
+    .background-enter-active, .background-leave-active 
+        transition: opacity 0.24s ease
+
+    .background-enter-from, .background-leave-to 
+        opacity: 0
 </style>
