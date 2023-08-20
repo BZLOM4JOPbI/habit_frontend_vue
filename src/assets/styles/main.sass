@@ -35,6 +35,7 @@ body, figure[class], blockquote[class]
 
 :where(a[class])
     text-decoration: none
+    color: inherit
 
 :where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class])
     margin-block: 0 
@@ -66,6 +67,7 @@ body
     min-height: 100%
     font-family: 'Ubuntu', sans-serif
     font-weight: 400
+    color: $font-color-base
 
 @media (prefers-reduced-motion: reduce)
   * 

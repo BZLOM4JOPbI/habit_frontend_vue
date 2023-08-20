@@ -25,7 +25,7 @@ import GuestSwitch from './GuestSwitch.vue'
     top: 0
     left: 0
     right: 0
-    background-color: $bg-color
+    background-color: $bg-white
     z-index: 5
 .header__inner 
     padding: 20px 0

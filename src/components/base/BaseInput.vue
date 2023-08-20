@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, } from 'vue';
 
-const props = defineProps([ 'modelValue', 'label', 'type', 'errorMessage', ]);
+const props = defineProps([ 'modelValue', 'label', 'type', 'errorMessage', 'isRequired', ]);
 defineEmits([ 'update:modelValue', ]);
 
 const inputMask = computed(() => {
@@ -16,8 +16,10 @@ const inputMask = computed(() => {
                 :type="props.type" 
                 class="input"
                 :value="props.modelValue"
+                :name="props.type"
                 @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
                 v-maska="inputMask"
+                :required="props.isRequired"
             >
             <div 
                 class="input__placeholder"
@@ -60,7 +62,7 @@ const inputMask = computed(() => {
     z-index: 0
     color: $font-color-opacity
     padding: 3px 5px
-    background-color: $bg-color
+    background-color: $bg-white
     font-size: $font-size-ss
     user-select: none
     transition: all .3s ease

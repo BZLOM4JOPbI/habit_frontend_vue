@@ -96,7 +96,7 @@ onMounted(() => {
         top: 0
         left: 0
         right: 0
-        background-color: $bg-color
+        background-color: $bg-white
         z-index: 1
         transition: transform .2s
         // border-bottom: 1px solid black

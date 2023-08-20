@@ -19,5 +19,8 @@ import GuestFooter from '@/components/layout/guest/GuestFooter.vue';
 .main 
     margin: 80px 0 100px
     flex: 1 1 auto
-
+    @media (max-width: 768px)
+        margin: 60px 0 85px
+    @media (max-width: 500px)
+        margin: 50px 0 75px
 </style>
