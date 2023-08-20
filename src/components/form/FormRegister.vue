@@ -61,7 +61,7 @@ const submitHandler = async () => {
 </script>
 
 <template>
-    <section class="form-wrap">
+    <section class="form__wrap">
         <form class="form" @submit.prevent="submitHandler">
                 <BaseInput 
                     v-model="userModel.phone" 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { reactive, } from 'vue';
 
-defineProps([ 'label', 'isDisable']);
+defineProps([ 'label', 'isDisable', ]);
 
 const backgroundArray = reactive({
-    'button-active-left': false,
-    'button-active-right': false,
+    'button_active-left': false,
+    'button_active-right': false,
 })
 
 const mouseInHandler = (e: MouseEvent) => {
@@ -18,16 +18,16 @@ const mouseInHandler = (e: MouseEvent) => {
         const relativePosition = mouseX / btnWidth;
 
         if (relativePosition <= 0.5) {
-            backgroundArray['button-active-right'] = true;
+            backgroundArray['button_active-right'] = true;
         } else if (relativePosition > 0.5) {
-            backgroundArray['button-active-left'] = true;
+            backgroundArray['button_active-left'] = true;
         }
     }
 };
 
 const mouseOutHandler = () => {
-    backgroundArray['button-active-left'] = false;
-    backgroundArray['button-active-right'] = false;
+    backgroundArray['button_active-left'] = false;
+    backgroundArray['button_active-right'] = false;
 }
 </script>
 
@@ -44,42 +44,41 @@ const mouseOutHandler = () => {
 </template>
 
 <style scoped lang="sass">
-    @import "@/assets/styles/main"
+@import "@/assets/styles/main"
 
 
-
-    .button
-        padding: 12px 20px
-        border: $b-width solid $font-color-base
-        background-color: transparent
-        cursor: pointer
-        position: relative
-        transition: color .3s
-        font-size: $font-size-s
-        overflow: hidden
-        &::before, &::after
-            content: ''
-            top: 0
-            bottom: 0
-            width: 0
-            background-color: $bg-dark
-            transform: skewX(35deg)
-            z-index: -1
-            transition: width .3s
-        &::before
-            left: -50px
-        &::after
-            right: -50px
-        &:focus
-            color: $font-color-light
-            &::before
-                width: calc(100% + 65px)
-    .button-active-left
-        color: $font-color-light
-        &::after
-            width: calc(100% + 65px)
-    .button-active-right
+.button
+    padding: 12px 20px
+    border: $b-width solid $font-color-base
+    background-color: transparent
+    cursor: pointer
+    position: relative
+    transition: color .3s
+    font-size: $font-size-s
+    overflow: hidden
+    &::before, &::after
+        content: ''
+        top: 0
+        bottom: 0
+        width: 0
+        background-color: $bg-dark
+        transform: skewX(35deg)
+        z-index: -1
+        transition: width .3s
+    &::before
+        left: -50px
+    &::after
+        right: -50px
+    &:focus
         color: $font-color-light
         &::before
             width: calc(100% + 65px)
+.button_active-left
+    color: $font-color-light
+    &::after
+        width: calc(100% + 65px)
+.button_active-right
+    color: $font-color-light
+    &::before
+        width: calc(100% + 65px)
 </style>
