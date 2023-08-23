@@ -17,7 +17,7 @@ const router = createRouter({
             component: IndexView,
             redirect: '/feed',
             meta: {
-                layout: 'DefaultLayout',
+                layout: 'BaseLayout',
                 forAuth: true,
             },
             children: [

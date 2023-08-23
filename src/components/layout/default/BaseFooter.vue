@@ -5,9 +5,9 @@ const currentYear = new Date().getFullYear();
 <template>
     <footer class="footer">
         <div class="container">
-            <div class="footer-inner">
-                <div class="footer-logo logo">habit</div>
-                <div class="footer-copy">&copy;{{ currentYear }}</div>
+            <div class="footer__inner">
+                <div class="footer__logo logo">habit</div>
+                <div class="footer__copy">&copy;{{ currentYear }}</div>
             </div>
         </div>
     </footer>
@@ -17,16 +17,15 @@ const currentYear = new Date().getFullYear();
     @import "@/assets/styles/main"
 
 
-    .footer-inner 
+    .footer__inner 
         padding: 20px 0
         display: flex
         justify-content: center
         align-items: flex-start
-    .footer-logo 
+    .footer__logo 
         font-size: 24px
-    .footer-copy
+    .footer__copy
         font-weight: 700
         user-select: none
-        
 
 </style>
