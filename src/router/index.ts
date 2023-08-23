@@ -4,6 +4,9 @@ import RegisterView from "../views/RegisterView.vue";
 import LoginView from "../views/LoginView.vue";
 import FeedView from "../views/FeedView.vue";
 import TrendView from "../views/TrendView.vue";
+import SearchView from "../views/SearchView.vue";
+import ProfileView from "../views/ProfileView.vue";
+import NotificationView from "../views/NotificationView.vue";
 
 import authMiddleware from './middleware/auth'
 
@@ -23,7 +26,23 @@ const router = createRouter({
             children: [
                 {
                     path: 'feed',
+                    name: 'feed',
                     component: FeedView,
+                },
+                {
+                    path: 'profile',
+                    component: ProfileView,
+                    name: 'profile',
+                },
+                {
+                    path: 'search',
+                    component: SearchView,
+                    name: 'search',
+                },
+                {
+                    path: 'notifications',
+                    component: NotificationView,
+                    name: 'notifications',
                 },
                 {
                     path: 'trend',

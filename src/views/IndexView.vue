@@ -3,7 +3,7 @@ import { useUserStore, } from "@/stores/user"
 import BaseButton from '@/components/base/BaseButton.vue'
 import BaseTitle from '../components/base/BaseTitle.vue'
 import { computed, ref, } from "vue";
-import { useRouter, RouterView, } from 'vue-router';
+import { useRouter, RouterView, RouterLink, } from 'vue-router';
 
 
 const router = useRouter();
@@ -41,6 +41,7 @@ const createdAt = computed(() => {
             <div class="profile-field">Email: <span>{{ userStore.user?.email || 'Load'}}</span></div>
             <div class="profile-field">Created at: <span>{{ createdAt }}</span></div>        
             <BaseButton :label="'Sign Out'" @click="handeLogout" />
+            <RouterLink to="trend">trends</RouterLink>
         </div>
         <RouterView></RouterView>
     </div>
