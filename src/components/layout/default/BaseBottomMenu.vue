@@ -1,45 +1,12 @@
 <script setup lang="ts">
-import { reactive, watch, } from 'vue';
+import { reactive, watch, ref, computed, } from 'vue';
 import { RouterLink, useRouter, } from 'vue-router';
 
 
-const currentPageIndicatior = reactive({
-    'bottom-menu__indicator_active' : true,
-    'bottom-menu__indicator_active-feed' : false,
-    'bottom-menu__indicator_active-search' : false,
-    'bottom-menu__indicator_active-profile' : false,
-    'bottom-menu__indicator_active-notifications' : false,
-});
-// const nameToClass = Object.freeze({
-//     feed: 'bottom-menu__indicator_active-first',
-//     search: 'bottom-menu__indicator_active-second',
-//     notifications: 'bottom-menu__indicator_active-third',
-//     profile: 'bottom-menu__indicator_active-four',
-// })
-const indicatedRoutes = [ 'feed', 'search', 'profile', 'notifications', ];
-
 const router = useRouter();
-watch(router.currentRoute, () => {
-    const currentRouteName = router.currentRoute.value.name as string;
-    if (indicatedRoutes.includes(currentRouteName)) {
-        type K = typeof currentPageIndicatior;
-        let indicatorClassKey: keyof K;
-        for (indicatorClassKey in currentPageIndicatior) {
-            if (indicatorClassKey.includes(currentRouteName)) {
-                currentPageIndicatior[indicatorClassKey] = true;
-            } else {
-                currentPageIndicatior[indicatorClassKey] = false;
-            }
-            currentPageIndicatior['bottom-menu__indicator_active'] = true;
-        }
-    } else {
-        type K = typeof currentPageIndicatior;
-        let indicatorClass: keyof K;
-        for (indicatorClass in currentPageIndicatior) {
-            currentPageIndicatior[indicatorClass] = false;
-        }
-    }
-    console.table(currentPageIndicatior);
+const indicatedRoutes = [ 'feed', 'search', 'profile', 'notifications', ];
+const isIndicatorActive = computed(() => {
+    return indicatedRoutes.includes(router.currentRoute.value.name as string)
 })
 </script>
 
@@ -48,7 +15,10 @@ watch(router.currentRoute, () => {
         <div class="bottom-menu__inner">
             <RouterLink 
                 to="/feed" 
-                class="bottom-menu__item bottom-menu__item_active"
+                class="bottom-menu__item"
+                :class="{
+                    'bottom-menu__item_active' : $router.currentRoute.value.name === 'feed'
+                }"
             >
                 <div class="bottom-menu__item-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
@@ -62,6 +32,9 @@ watch(router.currentRoute, () => {
             <RouterLink 
                 to="/search" 
                 class="bottom-menu__item"
+                :class="{
+                    'bottom-menu__item_active' : $router.currentRoute.value.name === 'search'
+                }"
             >
                 <div class="bottom-menu__item-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -75,6 +48,9 @@ watch(router.currentRoute, () => {
             <RouterLink 
                 to="/notifications" 
                 class="bottom-menu__item"
+                :class="{
+                    'bottom-menu__item_active' : $router.currentRoute.value.name === 'notifications'
+                }"
             >
                 <div class="bottom-menu__item-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
@@ -88,6 +64,9 @@ watch(router.currentRoute, () => {
             <RouterLink 
                 to="/profile" 
                 class="bottom-menu__item"
+                :class="{
+                    'bottom-menu__item_active' : $router.currentRoute.value.name === 'profile'
+                }"
             >
                 <div class="bottom-menu__item-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
@@ -100,8 +79,14 @@ watch(router.currentRoute, () => {
             </RouterLink>
             <div 
                 class="bottom-menu__indicator"
-                :class="currentPageIndicatior"
+                :class="{
+                    'bottom-menu__indicator_active' : isIndicatorActive,
+                }"
             >
+            <!-- 'bottom-menu__indicator_active-search' : $router.currentRoute.value.name === 'search',
+            'bottom-menu__indicator_active-profile' : $router.currentRoute.value.name === 'profile',
+            'bottom-menu__indicator_active-feed' : $router.currentRoute.value.name === 'feed',
+            'bottom-menu__indicator_active-notifications' : $router.currentRoute.value.name === 'notifications', -->
             </div>
         </div>
     </nav>
@@ -142,15 +127,26 @@ watch(router.currentRoute, () => {
     padding: 0.4em
     overflow-x: hidden
 
+.bottom-menu__item:nth-child(1).bottom-menu__item_active ~ .bottom-menu__indicator_active
+    transform: translateX(0)
+
+.bottom-menu__item:nth-child(2).bottom-menu__item_active ~ .bottom-menu__indicator_active
+    transform: translateX(100%)
+
+.bottom-menu__item:nth-child(3).bottom-menu__item_active ~ .bottom-menu__indicator_active
+    transform: translateX(200%)
+
+.bottom-menu__item:nth-child(4).bottom-menu__item_active ~ .bottom-menu__indicator_active
+    transform: translateX(300%)
+
 .bottom-menu__item-title
     max-width: 100%
     overflow-x: hidden
     white-space: nowrap
     text-overflow: ellipsis
 
-// .bottom-menu__indicator
-//     width: 0
-//     transition: width .3s
+.bottom-menu__indicator
+    transition: transform .2s ease
 
 .bottom-menu__indicator_active
     position: absolute
@@ -159,17 +155,14 @@ watch(router.currentRoute, () => {
     height: 2px
     background-color: black
     border-radius: $b-radius-m $b-radius-m 0 0
-    transition: transform .2s ease
+    opacity: 0
+    animation: indicatorIncrease .5s .2s forwards
 
-.bottom-menu__indicator_active-feed
-    transform: translateX(0)
-
-.bottom-menu__indicator_active-search
-    transform: translateX(100%)
-
-.bottom-menu__indicator_active-notifications
-    transform: translateX(200%)
-
-.bottom-menu__indicator_active-profile
-    transform: translateX(300%)
+@keyframes indicatorIncrease
+    0%
+        // transform: translateY(-100%)
+        opacity: 0
+    100%
+        // transform: translateY(0)
+        opacity: 1
 </style>
