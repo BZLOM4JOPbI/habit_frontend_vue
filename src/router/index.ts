@@ -17,7 +17,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'index',
-            component: IndexView,
+            // component: IndexView,
             redirect: '/feed',
             meta: {
                 layout: 'BaseLayout',

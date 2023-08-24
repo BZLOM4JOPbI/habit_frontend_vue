@@ -37,16 +37,17 @@ const emit = defineEmits<{
     left: 0
     right: 0
     bottom: 0
-    z-index: 1
+    z-index: 2
     background-color: $bg-opacity
 
 .burger
     position: fixed
     width: 60%
     height: 100vh
-    background-color: black
+    background-color: $bg-white
     top: 0
     z-index: 2
+    box-shadow: 3px 0px 5px $bg-opacity
 .burger-enter-active, .burger-leave-active 
     transform: translateX(0)
     transition: transform 0.24s ease

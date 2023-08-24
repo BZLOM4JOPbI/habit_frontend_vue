@@ -11,8 +11,8 @@ import BaseBottomMenu from '@/components/layout/default/BaseBottomMenu.vue';
     <main class="main">
         <slot />
     </main>
-    <BaseBottomMenu />
     <BaseFooter />
+    <BaseBottomMenu />
 </template>
 
 <style scoped lang="sass">
