@@ -83,10 +83,6 @@ const isIndicatorActive = computed(() => {
                     'bottom-menu__indicator_active' : isIndicatorActive,
                 }"
             >
-            <!-- 'bottom-menu__indicator_active-search' : $router.currentRoute.value.name === 'search',
-            'bottom-menu__indicator_active-profile' : $router.currentRoute.value.name === 'profile',
-            'bottom-menu__indicator_active-feed' : $router.currentRoute.value.name === 'feed',
-            'bottom-menu__indicator_active-notifications' : $router.currentRoute.value.name === 'notifications', -->
             </div>
         </div>
     </nav>
@@ -139,6 +135,8 @@ const isIndicatorActive = computed(() => {
 .bottom-menu__item:nth-child(4).bottom-menu__item_active ~ .bottom-menu__indicator_active
     transform: translateX(300%)
 
+.bottom-menu__item_active >.bottom-menu__item-svg
+    animation: acitveItem .2s ease-in
 .bottom-menu__item-title
     max-width: 100%
     overflow-x: hidden
@@ -146,23 +144,24 @@ const isIndicatorActive = computed(() => {
     text-overflow: ellipsis
 
 .bottom-menu__indicator
-    transition: transform .2s ease
+    opacity: 0
+    transition: transform .2s ease, opacity .2s .2s
 
 .bottom-menu__indicator_active
+    opacity: 1
     position: absolute
     width: 25%
     bottom: 0
     height: 2px
     background-color: black
     border-radius: $b-radius-m $b-radius-m 0 0
-    opacity: 0
-    animation: indicatorIncrease .5s .2s forwards
 
-@keyframes indicatorIncrease
+@keyframes acitveItem
     0%
-        // transform: translateY(-100%)
-        opacity: 0
+        transform: scale(1)
+    50%
+        transform: scale(.9)
     100%
-        // transform: translateY(0)
-        opacity: 1
+        transform: scale(1)
+
 </style>
