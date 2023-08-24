@@ -20,8 +20,6 @@ import BaseBottomMenu from '@/components/layout/default/BaseBottomMenu.vue';
 
 
     .main 
-        margin: 15pxpx 0 15px
         flex: 1 1 auto
-        height: 200vh
-
+        padding: 20px 0
 </style>

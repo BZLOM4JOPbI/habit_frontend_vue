@@ -17,38 +17,55 @@ const router = createRouter({
         {
             path: '/',
             name: 'index',
-            // component: IndexView,
             redirect: '/feed',
             meta: {
                 layout: 'BaseLayout',
                 forAuth: true,
             },
-            children: [
-                {
-                    path: 'feed',
-                    name: 'feed',
-                    component: FeedView,
-                },
-                {
-                    path: 'profile',
-                    component: ProfileView,
-                    name: 'profile',
-                },
-                {
-                    path: 'search',
-                    component: SearchView,
-                    name: 'search',
-                },
-                {
-                    path: 'notifications',
-                    component: NotificationView,
-                    name: 'notifications',
-                },
-                {
-                    path: 'trend',
-                    component: TrendView,
-                },
-            ],
+        },
+        {
+            path: '/feed',
+            name: 'feed',
+            component: FeedView,
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
+        },
+        {
+            path: '/profile',
+            component: ProfileView,
+            name: 'profile',
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
+        },
+        {
+            path: '/search',
+            component: SearchView,
+            name: 'search',
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
+        },
+        {
+            path: '/notifications',
+            component: NotificationView,
+            name: 'notifications',
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
+        },
+        {
+            path: '/trend',
+            component: TrendView,
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
         },
         {
             path: '/signup',
