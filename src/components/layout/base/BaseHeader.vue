@@ -2,7 +2,7 @@
 import { onMounted, ref, } from 'vue';
 // import { throttle, } from '@/utils/wrappers'
 import BaseSideMenu from './BaseSideMenu.vue';
-import BurgerBtn from '../default/BurgerBtn.vue'
+import BurgerBtn from '../default/BurgerBtn.vue';
 
 
 const isBurgerShow = ref<Boolean>(false);
@@ -31,9 +31,11 @@ const isBurgerShow = ref<Boolean>(false);
     >
         <div class="container">
             <nav class="header__inner">
-                <BurgerBtn 
-                    @openSideMenu="isBurgerShow = true"
-                />
+                <div class="header__burger-btn">
+                    <BurgerBtn 
+                        @openSideMenu="isBurgerShow = true"
+                    />
+                </div>
                 <div class="header__logo-wrap">
                     <div class="header__logo logo">h</div>
                 </div>
@@ -78,23 +80,7 @@ const isBurgerShow = ref<Boolean>(false);
         font-size: $font-size-l
 .header__burger-btn
     grid-column: span 2
-    width: 30px
-    cursor: pointer
-.header__burger-btn-inner
-    padding-top: 80%
-    position: relative
-.header__burger-btn-rectangle
-    position: absolute
-    width: 100%
-    height: 3px
-    background-color: $bg-dark
-    &:nth-child(1)
-        top: 0
-    &:nth-child(2)
-        top: 50%
-        transform: translateY(-50%)
-    &:nth-child(3)
-        bottom: 0
+
 .header__search
     justify-self: end
     grid-column: span 2
