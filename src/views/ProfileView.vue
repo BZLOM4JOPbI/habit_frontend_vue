@@ -1,5 +1,5 @@
 <template>
     <div class="container">
-        profile
+        profile {{ $route.params.username }}
     </div>
 </template>

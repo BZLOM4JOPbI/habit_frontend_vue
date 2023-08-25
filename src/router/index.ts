@@ -16,10 +16,9 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'index',
             redirect: '/feed',
+            name: 'index-redirect',
             meta: {
-                layout: 'BaseLayout',
                 forAuth: true,
             },
         },
@@ -85,7 +84,15 @@ const router = createRouter({
                 forGuest: true,
             },
         },
-
+        {
+            path: '/:username',
+            name: 'profile',
+            component: ProfileView,
+            meta: {
+                layout: 'BaseLayout',
+                forAuth: true,
+            },
+        },
     ],
 })
 

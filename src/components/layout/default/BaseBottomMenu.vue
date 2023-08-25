@@ -3,11 +3,15 @@ import { reactive, watch, ref, computed, } from 'vue';
 import { RouterLink, useRouter, } from 'vue-router';
 
 
+defineProps<{
+    username: string,
+}>();
+
 const router = useRouter();
 const indicatedRoutes = [ 'feed', 'search', 'profile', 'notifications', ];
 const isIndicatorActive = computed(() => {
     return indicatedRoutes.includes(router.currentRoute.value.name as string)
-})
+});
 </script>
 
 <template>
@@ -78,7 +82,7 @@ const isIndicatorActive = computed(() => {
                 </div>
             </RouterLink>
             <RouterLink 
-                to="/profile" 
+                :to="`/${username}`" 
                 class="bottom-menu__item"
                 :class="{
                     'bottom-menu__item_active' : $router.currentRoute.value.name === 'profile'

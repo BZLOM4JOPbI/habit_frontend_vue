@@ -2,8 +2,10 @@
 import BaseHeader from '@/components/layout/default/BaseHeader.vue';
 import BaseFooter from '@/components/layout/default/BaseFooter.vue';
 import BaseBottomMenu from '@/components/layout/default/BaseBottomMenu.vue';
+import { useUserStore, } from '@/stores/user'
 
 
+const user = useUserStore();
 </script>
 
 <template>
@@ -12,7 +14,9 @@ import BaseBottomMenu from '@/components/layout/default/BaseBottomMenu.vue';
         <slot />
     </main>
     <BaseFooter />
-    <BaseBottomMenu />
+    <BaseBottomMenu 
+        :username="(user.user?.name as string)"
+    />
 </template>
 
 <style scoped lang="sass">
