@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref, } from 'vue';
-import { throttle, } from '@/utils/wrappers'
+// import { throttle, } from '@/utils/wrappers'
 import BaseSideMenu from './BaseSideMenu.vue';
+import BurgerBtn from '../default/BurgerBtn.vue'
 
 
 const isBurgerShow = ref<Boolean>(false);
@@ -30,16 +31,9 @@ const isBurgerShow = ref<Boolean>(false);
     >
         <div class="container">
             <nav class="header__inner">
-                <div 
-                    class="header__burger-btn"
-                    @click="isBurgerShow = true"
-                >
-                    <div class="header__burger-btn-inner">
-                        <div class="header__burger-btn-rectangle"></div>
-                        <div class="header__burger-btn-rectangle"></div>
-                        <div class="header__burger-btn-rectangle"></div>
-                    </div>
-                </div>
+                <BurgerBtn 
+                    @openSideMenu="isBurgerShow = true"
+                />
                 <div class="header__logo-wrap">
                     <div class="header__logo logo">h</div>
                 </div>

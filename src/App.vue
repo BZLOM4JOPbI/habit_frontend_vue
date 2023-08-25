@@ -3,6 +3,7 @@ import { computed, onMounted, } from 'vue';
 import { RouterView, } from 'vue-router'
 import { useRouter,  } from 'vue-router'
 import { useUserStore, } from './stores/user';
+import BaseBottomMenu from '@/components/layout/base/BaseBottomMenu.vue';
 
 
 const router = useRouter()
@@ -20,5 +21,12 @@ onMounted(async () => {
     <component :is="layout">
         <RouterView />
     </component>
+    <!-- 
+        TODO: think about bottom menu injection
+    -->
+    <BaseBottomMenu 
+        v-if="layout !== 'GuestLayout'"
+        :username="(userStore.user?.name as string)"
+    />
 </template>
 

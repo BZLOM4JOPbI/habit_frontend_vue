@@ -8,6 +8,8 @@ import router from './router'
 
 import GuestLayout from './layout/GuestLayout.vue'
 import BaseLayout from './layout/BaseLayout.vue'
+import ProfileLayout from './layout/ProfileLayout.vue'
+
 import Maska from 'maska'
 
 const app = createApp(App);
@@ -17,5 +19,6 @@ app.use(router);
 app.use(Maska);
 app.component('GuestLayout', GuestLayout);
 app.component('BaseLayout', BaseLayout);
+app.component('ProfileLayout', ProfileLayout);
 
 app.mount('#app');

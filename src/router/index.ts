@@ -89,7 +89,7 @@ const router = createRouter({
             name: 'profile',
             component: ProfileView,
             meta: {
-                layout: 'BaseLayout',
+                layout: 'ProfileLayout',
                 forAuth: true,
             },
         },

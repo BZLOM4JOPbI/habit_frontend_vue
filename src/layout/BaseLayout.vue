@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import BaseHeader from '@/components/layout/default/BaseHeader.vue';
-import BaseFooter from '@/components/layout/default/BaseFooter.vue';
-import BaseBottomMenu from '@/components/layout/default/BaseBottomMenu.vue';
+import BaseHeader from '@/components/layout/base/BaseHeader.vue';
+import BaseFooter from '@/components/layout/base/BaseFooter.vue';
+import BaseBottomMenu from '@/components/layout/base/BaseBottomMenu.vue';
 import { useUserStore, } from '@/stores/user'
 
 
@@ -14,9 +14,9 @@ const user = useUserStore();
         <slot />
     </main>
     <BaseFooter />
-    <BaseBottomMenu 
+    <!-- <BaseBottomMenu 
         :username="(user.user?.name as string)"
-    />
+    /> -->
 </template>
 
 <style scoped lang="sass">
@@ -25,5 +25,5 @@ const user = useUserStore();
 
     .main 
         flex: 1 1 auto
-        padding: 20px 0
+        padding-block: 20px
 </style>
