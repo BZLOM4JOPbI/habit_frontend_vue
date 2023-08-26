@@ -65,7 +65,7 @@ const isBurgerShow = ref<Boolean>(false);
 .header-hide
     transform: translateY(-100%)
 .header__inner 
-    padding: 14px 0 2px
+    height: $header-height
     display: grid
     grid-template-columns: repeat(6, 1fr)
     align-items: center
