@@ -19,7 +19,7 @@ defineProps<{
 <style scoped lang="sass">
 @import "@/assets/styles/main"
 
-.avatar
+// .avatar
 .avatar__inner
     position: relative
     padding-top: 100%
