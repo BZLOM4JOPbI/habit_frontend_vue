@@ -43,7 +43,7 @@ const emit = defineEmits<{
 .burger
     position: fixed
     width: 60%
-    height: 100vh
+    height: 100dvh
     background-color: $bg-white
     top: 0
     z-index: 2

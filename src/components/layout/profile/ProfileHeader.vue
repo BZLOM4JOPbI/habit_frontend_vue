@@ -53,9 +53,9 @@ const isBurgerShow = ref<Boolean>(false);
     align-items: center
     justify-content: space-between
     flex-wrap: wrap
-    gap: 20px
+    gap: 20px       
 
-.header__username
+// .header__username
 .header__goback-arrow
     // height: 18px
     cursor: pointer
