@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { RouterLink, } from 'vue-router';
 defineProps<{
     imgUrl: string,
 }>();
 </script>
 
 <template>
-    <div class="avatar">
+    <RouterLink 
+        class="avatar"
+        :to="`/`"
+    >
         <div class="avatar__inner">
             <div 
                 class="avatar__img"
@@ -13,20 +17,22 @@ defineProps<{
             >
             </div>
         </div>
-    </div>
+    </RouterLink>
 </template>
 
 <style scoped lang="sass">
 @import "@/assets/styles/main"
 
-// .avatar
+
+.avatar
+    border-radius: 50%
 .avatar__inner
     position: relative
     padding-top: 100%
 
 .avatar__img
     border-radius: 50%
-    border: 1px solid $bg-dark
+    // border: 1px solid $bg-dark
     outline: 3px solid $bg-white
     // outline-offset: 1px
     position: absolute

@@ -15,7 +15,9 @@ import ProfileAvatar from '@/components/layout/profile/ProfileAvatar.vue';
                         :img-url="'/marylin.jpg'"
                     />
                 </div>
-                UserName
+                <h2 class="profile__name">
+                    {{ $route.params.username }}
+                </h2>
             </section>
         </div>
     </div>
@@ -25,12 +27,16 @@ import ProfileAvatar from '@/components/layout/profile/ProfileAvatar.vue';
 @import "@/assets/styles/main"
 
 .profile__head
-    display: grid
-    grid-template-columns: 3fr 8fr
+    display: flex
     align-items: center
+    flex-direction: column
     gap: 20px
-    text-align: center
+    transform: translateY(-40%)
 
 .profile__avatar
-    transform: translateY(-40%)
+    width: 28%
+    min-width: 85px
+.profile__name
+    font-weight: 500
+    font-size: $font-size-m
 </style>

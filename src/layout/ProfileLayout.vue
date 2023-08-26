@@ -21,5 +21,5 @@ const user = useUserStore();
 
 .main 
     flex: 1 1 auto
-    padding-block: 25px
+    // padding-block: 25px
 </style>
